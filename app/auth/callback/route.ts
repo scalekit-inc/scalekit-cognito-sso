@@ -7,22 +7,35 @@ export async function GET(request: NextRequest) {
     const client = await getOidcClient();
     const session = await getSession();
     const params = client.callbackParams(request.url);
+
+    // Call the callback method with nonce and state verification options
     const tokenSet = await client.callback(
       process.env.REDIRECT_URI || 'http://localhost:3000/api/auth/callback',
-      params
+      params,
+      {
+        nonce: session.nonce,
+        state: session.state,
+      }
     );
+
+    // Get user info from the token
     const userInfo = await client.userinfo(tokenSet);
 
+    // Clear state and nonce from session
+    session.state = undefined;
+    session.nonce = undefined;
+
+    // Store complete userInfo in session
     session.isLoggedIn = true;
+    session.userInfo = userInfo;
     session.username = userInfo.preferred_username;
     session.userId = userInfo.sub;
     await session.save();
 
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    // Redirect to home page like in Express example
+    return NextResponse.redirect(new URL('/', request.url));
   } catch (error) {
     console.error('Authentication error:', error);
-    return NextResponse.redirect(
-      new URL('/auth?error=authentication_failed', request.url)
-    );
+    return NextResponse.redirect(new URL('/', request.url));
   }
 }

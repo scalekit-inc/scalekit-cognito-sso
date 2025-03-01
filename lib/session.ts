@@ -1,11 +1,24 @@
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
+import { UserinfoResponse } from 'openid-client';
+
+// Define UserInfo interface for OIDC response
+export interface UserInfo {
+  sub: string;
+  preferred_username?: string;
+  email?: string;
+  phone_number?: string;
+  [key: string]: unknown; // For other attributes that might be returned
+}
 
 // Define the session data type
 export interface SessionData {
   isLoggedIn: boolean;
   username?: string;
   userId?: string;
+  nonce?: string;
+  state?: string;
+  userInfo?: UserinfoResponse; // Store complete user info from OIDC provider
   // Add any other session data you need
 }
 

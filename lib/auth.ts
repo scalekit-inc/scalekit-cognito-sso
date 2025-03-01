@@ -1,4 +1,5 @@
 import { Issuer, Client, generators } from 'openid-client';
+import { getSession } from './session';
 
 let client: Client | null = null;
 
@@ -20,4 +21,19 @@ export async function getOidcClient(): Promise<Client> {
   });
 
   return client;
+}
+
+// Get user info from session
+export async function getUserInfo() {
+  const session = await getSession();
+
+  if (!session.isLoggedIn) {
+    return null;
+  }
+
+  return {
+    username: session.username,
+    userId: session.userId,
+    // Add other user info from session
+  };
 }

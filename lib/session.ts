@@ -1,24 +1,39 @@
-import { SessionOptions } from 'iron-session';
+import { getIronSession } from 'iron-session';
+import { cookies } from 'next/headers';
 
+// Define the session data type
 export interface SessionData {
   isLoggedIn: boolean;
+  username?: string;
   userId?: string;
-  accessToken?: string;
-  refreshToken?: string;
+  // Add any other session data you need
 }
 
-export const sessionOptions: SessionOptions = {
+export const sessionOptions = {
   password:
     process.env.SESSION_SECRET ||
     'complex_password_at_least_32_characters_long',
   cookieName: 'cognito-scalekit-session',
   cookieOptions: {
-    // secure should be enabled in production
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
-    maxAge: 60 * 60 * 24, // 1 day
   },
 };
+
+export async function getSession() {
+  const cookieStore = await cookies();
+  const session = await getIronSession<SessionData>(
+    cookieStore,
+    sessionOptions
+  );
+
+  // Initialize the session if it's new
+  if (!session.isLoggedIn) {
+    session.isLoggedIn = false;
+  }
+
+  return session;
+}
 
 // For type safety
 declare module 'iron-session' {

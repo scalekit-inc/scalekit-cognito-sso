@@ -8,6 +8,10 @@ export async function GET(request: NextRequest) {
     const client = await getOidcClient();
     const session = await getSession();
 
+    // Get email from search params
+    const searchParams = new URL(request.url).searchParams;
+    const email = searchParams.get('email') || '';
+
     // Generate nonce and state for security
     const nonce = generators.nonce();
     const state = generators.state();
@@ -22,19 +26,10 @@ export async function GET(request: NextRequest) {
       scope: 'openid email phone',
       state: state,
       nonce: nonce,
+      identity_provider: 'ScalekitOIDC123',
+      login_hint: email,
     });
-
-    // Redirect to authorization URL
     const response = NextResponse.redirect(authUrl);
-
-    // Set code verifier cookie
-    // response.cookies.set('code_verifier', codeVerifier, {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === 'production',
-    //   maxAge: 60 * 10, // 10 minutes
-    //   path: '/',
-    // });
-
     return response;
   } catch (error) {
     console.error('Login error:', error);

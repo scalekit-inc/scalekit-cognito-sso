@@ -20,17 +20,23 @@ export async function GET(request: NextRequest) {
     // https://[domain].auth.[region].amazoncognito.com/logout?client_id=[app client id]&logout_uri=[redirect URI]
     const clientId =
       process.env.COGNITO_CLIENT_ID || 'k6tana1l8b0bvhk9gfijkurr6';
+
     const redirectUri = encodeURIComponent(
       new URL('/', request.url).toString()
     );
 
+    console.log('Redirect URI:', redirectUri);
+
     // Using the domain name format from the Cognito console
     // Usually domain-prefix.auth.region.amazoncognito.com
     const cognitoDomain =
-      process.env.COGNITO_DOMAIN ||
-      'scalekit-cognito-demo.auth.eu-north-1.amazoncognito.com';
+      `${process.env.COGNITO_DOMAIN}.auth.${process.env.AWS_REGION}.amazoncognito.com` ||
+      'eu-north-16m0o668r5.auth.eu-north-1.amazoncognito.com';
 
+    // https://<your-domain>.auth.<region>.amazoncognito.com/logout?client_id=<your-app-client-id>&logout_uri=<your-logout-redirect-uri>
+    // https://scalekit-cognito-demo.auth.eu-north-1.amazoncognito.com/logout?client_id=k6tana1l8b0bvhk9gfijkurr6&logout_uri=http%3A%2F%2Flocalhost%3A3000%2F
     const logoutUrl = `https://${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${redirectUri}`;
+    console.log('Logout URL:', logoutUrl);
 
     // Redirect to Cognito logout endpoint
     return NextResponse.redirect(logoutUrl);

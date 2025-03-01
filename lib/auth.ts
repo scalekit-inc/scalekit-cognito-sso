@@ -1,4 +1,4 @@
-import { Issuer, Client, generators } from 'openid-client';
+import { Issuer, Client } from 'openid-client';
 import { getSession } from './session';
 
 let client: Client | null = null;
@@ -15,7 +15,7 @@ export async function getOidcClient(): Promise<Client> {
     client_id: process.env.COGNITO_CLIENT_ID || 'k6tana1l8b0bvhk9gfijkurr6',
     client_secret: process.env.COGNITO_CLIENT_SECRET || '',
     redirect_uris: [
-      process.env.REDIRECT_URI || 'http://localhost:3000/api/auth/callback',
+      process.env.REDIRECT_URI || 'http://localhost:3000/auth/callback',
     ],
     response_types: ['code'],
   });
@@ -31,9 +31,17 @@ export async function getUserInfo() {
     return null;
   }
 
+  // If userInfo is available in the session, return it
+  if (session.userInfo) {
+    return {
+      ...session.userInfo,
+      username: session.username,
+      userId: session.userId,
+    };
+  }
+
   return {
     username: session.username,
     userId: session.userId,
-    // Add other user info from session
   };
 }

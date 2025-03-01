@@ -8,9 +8,13 @@ export async function GET(request: NextRequest) {
     const session = await getSession();
     const params = client.callbackParams(request.url);
 
+    // Get the actual redirect URI from the request
+    const callbackUri = `${new URL(request.url).origin}/auth/callback`;
+    console.log('Callback URI:', callbackUri);
+
     // Call the callback method with nonce and state verification options
     const tokenSet = await client.callback(
-      process.env.REDIRECT_URI || 'http://localhost:3000/api/auth/callback',
+      process.env.REDIRECT_URI || callbackUri,
       params,
       {
         nonce: session.nonce,
@@ -20,6 +24,7 @@ export async function GET(request: NextRequest) {
 
     // Get user info from the token
     const userInfo = await client.userinfo(tokenSet);
+    console.log('userInfo', userInfo);
 
     // Clear state and nonce from session
     session.state = undefined;
@@ -28,7 +33,7 @@ export async function GET(request: NextRequest) {
     // Store complete userInfo in session
     session.isLoggedIn = true;
     session.userInfo = userInfo;
-    session.username = userInfo.preferred_username;
+    session.username = userInfo.email;
     session.userId = userInfo.sub;
     await session.save();
 

@@ -29,6 +29,7 @@ export async function GET(request: NextRequest) {
       identity_provider: 'ScalekitOIDC123',
       login_hint: email,
     });
+    console.log('authUrl', authUrl);
     const response = NextResponse.redirect(authUrl);
     return response;
   } catch (error) {

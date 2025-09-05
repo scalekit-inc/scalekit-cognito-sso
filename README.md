@@ -184,12 +184,12 @@ Before deploying to production:
 
 ## Additional Resources
 
-- 📚 [AWS Cognito Integration Guide](https://docs.scalekit.com/integrations/aws-cognito)
-- 🔧 [Scalekit API Reference](https://docs.scalekit.com/apis)
-- 💬 [Community Support](https://github.com/scalekit-inc/scalekit-sdk-node-js/discussions)
-- 🎯 [Get Started Guide](https://docs.scalekit.com/quick-start-guide)
-- ⚡ [AWS Cognito Documentation](https://docs.aws.amazon.com/cognito/)
-- 🔗 [OpenID Connect Specification](https://openid.net/connect/)
+  - 📚 [Scalekit Documentation](https://docs.scalekit.com)
+  - 🔧 [API Reference](https://docs.scalekit.com/apis/)
+  - 🚀 [Full Stack Auth Quickstart](https://docs.scalekit.com/fsa/quickstart/)
+  - 💬 [Community Examples](https://github.com/orgs/scalekit-developers/repositories)
+  - ⚡ [AWS Cognito Documentation](https://docs.aws.amazon.com/cognito/)
+  - 🔗 [OpenID Connect Specification](https://openid.net/connect/)
 
 ---
 

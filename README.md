@@ -1,6 +1,36 @@
-# AWS Cognito with Scalekit SSO Integration Demo
+<p align="center">
+  <a href="https://scalekit.com" target="_blank" rel="noopener noreferrer">
+    <picture>
+      <img src="https://cdn.scalekit.cloud/v1/scalekit-logo-dark.svg" height="64">
+    </picture>
+  </a>
+</p>
 
-This Next.js application demonstrates how to implement Single Sign-On (SSO) for enterprise users by integrating AWS Cognito with Scalekit using the OpenID Connect (OIDC) protocol.
+<h1 align="center">
+  AWS Cognito + Scalekit SSO Integration
+</h1>
+
+<p align="center">
+  <strong>Auth stack for AI apps ⚡ Enterprise SSO with AWS</strong>
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/@scalekit-sdk/node"><img src="https://img.shields.io/npm/v/@scalekit-sdk/node.svg" alt="npm version"></a>
+  <a href="https://github.com/scalekit-inc/scalekit-cognito-sso/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://docs.scalekit.com/integrations/aws-cognito"><img src="https://img.shields.io/badge/docs-AWS%20Integration-blue" alt="AWS Integration Guide"></a>
+</p>
+
+<p align="center">
+  Next.js application demonstrating enterprise SSO by bridging AWS Cognito with Scalekit using OIDC
+</p>
+
+## 🚀 What This Demo Shows
+
+- **AWS Cognito Integration**: Seamless federation with existing Cognito User Pools
+- **Enterprise SSO Bridge**: Connect Scalekit identity providers to AWS infrastructure  
+- **OIDC Protocol**: Standards-based authentication flow between services
+- **Secure Session Management**: Iron Session for encrypted cookie-based sessions
+- **Production Patterns**: Error handling, logout flows, and security best practices
 
 ## Features
 
@@ -144,10 +174,25 @@ Before deploying to production:
 - Implement proper error handling and logging
 - Ensure proper session cleanup during logout (both client-side and with Cognito)
 
-## Learn More
+## Key Integration Benefits
 
-- [AWS Cognito Documentation](https://docs.aws.amazon.com/cognito/)
-- [Scalekit Documentation](https://docs.scalekit.com/)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [OpenID Connect](https://openid.net/connect/)
-- [Iron Session](https://github.com/vvo/iron-session)
+- **Leverage Existing Infrastructure**: Keep using AWS Cognito while adding enterprise SSO
+- **Zero Migration**: No need to migrate existing user pools or applications  
+- **Enterprise Grade**: SAML/OIDC support for major identity providers
+- **Compliance Ready**: SOC2, GDPR, and enterprise security standards
+- **Scalable Architecture**: Handle thousands of enterprise organizations
+
+## Additional Resources
+
+  - 📚 [Scalekit Documentation](https://docs.scalekit.com)
+  - 🔧 [API Reference](https://docs.scalekit.com/apis/)
+  - 🚀 [Full Stack Auth Quickstart](https://docs.scalekit.com/fsa/quickstart/)
+  - 💬 [Community Examples](https://github.com/orgs/scalekit-developers/repositories)
+  - ⚡ [AWS Cognito Documentation](https://docs.aws.amazon.com/cognito/)
+  - 🔗 [OpenID Connect Specification](https://openid.net/connect/)
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://scalekit.com">Scalekit</a>
+</p>

@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getIronSession } from 'iron-session';
-import { sessionOptions } from './lib/session';
+import { sessionOptions, type SessionData } from './lib/session';
 
 export async function middleware(request: NextRequest) {
-  const session = await getIronSession(request, NextResponse, sessionOptions);
+  const response = NextResponse.next();
+  const session = await getIronSession<SessionData>(
+    request,
+    response,
+    sessionOptions
+  );
 
   // Check if user is logged in for protected routes
   if (
@@ -14,7 +19,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/api/auth/login', request.url));
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {

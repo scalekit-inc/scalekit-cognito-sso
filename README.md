@@ -13,7 +13,7 @@
 <p align="center">
   <strong>Enterprise SSO with AWS</strong>
 
-Scalekit provides auth and actions on behalf of users, with 600+ connectors and 35,000+ tools.
+Scalekit provides auth and actions on behalf of users, with 1,100+ connectors and 55,000+ tools.
 </p>
 
 <p align="center">
